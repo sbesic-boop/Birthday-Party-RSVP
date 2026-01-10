@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Party RSVP - February 7th!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .party-emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .date-time {
+            font-size: 1.3em;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .info-section {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .highlight strong {
+            color: #d39e00;
+        }
+
+        .video-placeholder {
+            background: #e8eaf6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .form-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px dashed #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .edit-btn {
+            background: #ffc107;
+            color: #333;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="party-emoji">🎉🎂🎈</div>
+            <h1>You're Invited!</h1>
+            <div class="date-time">February 7th, 2026 at 7:00 PM CT</div>
+            <p style="color: #666; font-size: 1.1em; margin-top: 10px;">
+                <strong>Location:</strong> 1030 Williamson Street, Madison, WI 53703, USA
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h2>🎤 The Main Event: Lightning Talks!</h2>
+            <p>
+                This isn't your typical birthday party! Everyone who attends can <i>optionally</i> prepare and present
+                a <strong>5-10 minute presentation</strong> on ANY topic they're passionate about.
+            </p>
+            <p>
+                Whether it's your favorite hobby, a weird fact you learned, a life story, a skill you have,
+                or literally anything else - we want to hear about it! Think TED talk meets birthday party.
+                Be creative, be funny, be you!
+            </p>
+            <div class="video-placeholder">
+                📹 <strong>Want to see an example?</strong> <link>//www.instagram.com/p/DOq155hjeoi/</link>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>🍕 Food & Drinks:</strong> We'll provide finger foods, snacks, and some drinks,
+            but feel free to BYOR (Bring Your Own Refreshments) if you'd like something specific!
+        </div>
+
+        <div class="form-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">RSVP Here!</h2>
+
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        We'll use this to let you edit your RSVP later if your plans change!
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label>Will you be attending? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attending" value="Yes" required>
+                            <span>Yes! I'll be there! 🎉</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="attending" value="No">
+                            <span>Sorry, can't make it 😢</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="presentation">What will your presentation be about?</label>
+                    <input type="text" id="presentation" name="presentation"
+                           placeholder="e.g., My collection of vintage spoons, How to juggle, The history of pizza...">
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Just a rough idea - you can always change it later!
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Any dietary restrictions?</label>
+                    <input type="text" id="dietary" name="dietary"
+                           placeholder="Vegetarian, allergies, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Additional comments or questions</label>
+                    <textarea id="comments" name="comments"
+                              placeholder="Anything else we should know?"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">Submit RSVP</button>
+                    <button type="button" class="edit-btn" onclick="enableEdit()">Edit My RSVP</button>
+                </div>
+            </form>
+
+            <div class="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px;">Submitting your RSVP...</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Your RSVP has been submitted! We can't wait to see you there!
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                ❌ Oops! Something went wrong. Please try again or contact the host directly.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Questions? Reach out to Senad!</p>
+            <p>Phone: 515-441-9625</p>
+            <p>Email: senad.bee123@gmail.com</p>
+            <p style="margin-top: 10px;">🎊 See you on February 7th! 🎊</p>
+        </div>
+    </div>
+
+    <script>
+        // Google Sheets configuration
+        // TODO: Replace this URL with your Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhIWnWzIH7PciPooAbDMFYLZ8txumsFkPn4NGhaXzZuFXIc9AZPn2ECrC-EzECBliJOw/exec';
+
+        const form = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const loading = document.querySelector('.loading');
+        const submitBtn = document.querySelector('.submit-btn');
+        const editBtn = document.querySelector('.edit-btn');
+
+        // Check if user has already submitted
+        window.addEventListener('load', function() {
+            const existingRSVP = localStorage.getItem('rsvp_email');
+            if (existingRSVP) {
+                // Load existing RSVP data
+                loadExistingRSVP(existingRSVP);
+            }
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            loading.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            submitBtn.disabled = true;
+
+            // Gather form data
+            const formData = new FormData(form);
+            const data = {
+                timestamp: new Date().toISOString(),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                attending: formData.get('attending'),
+                presentation: formData.get('presentation'),
+                dietary: formData.get('dietary'),
+                comments: formData.get('comments')
+            };
+
+            try {
+                // Send to Google Sheets
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Save email to localStorage for future edits
+                localStorage.setItem('rsvp_email', data.email);
+                localStorage.setItem('rsvp_data', JSON.stringify(data));
+
+                // Show success message
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Disable form fields
+                disableForm();
+                editBtn.style.display = 'block';
+
+            } catch (error) {
+                console.error('Error:', error);
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+            }
+        });
+
+        function loadExistingRSVP(email) {
+            const savedData = localStorage.getItem('rsvp_data');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('name').value = data.name || '';
+                document.getElementById('email').value = data.email || '';
+
+                const attendingRadio = document.querySelector(`input[name="attending"][value="${data.attending}"]`);
+                if (attendingRadio) attendingRadio.checked = true;
+
+                document.getElementById('presentation').value = data.presentation || '';
+                document.getElementById('dietary').value = data.dietary || '';
+                document.getElementById('comments').value = data.comments || '';
+
+                disableForm();
+                editBtn.style.display = 'block';
+                successMessage.style.display = 'block';
+                successMessage.textContent = '✅ You have already submitted your RSVP. Click "Edit My RSVP" to make changes.';
+            }
+        }
+
+        function disableForm() {
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => input.disabled = true);
+            submitBtn.style.display = 'none';
+        }
+
+        function enableEdit() {
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => input.disabled = false);
+            submitBtn.style.display = 'block';
+            submitBtn.textContent = 'Update RSVP';
+            editBtn.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

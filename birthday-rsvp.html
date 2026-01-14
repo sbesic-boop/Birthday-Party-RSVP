@@ -236,6 +236,60 @@
             100% { transform: rotate(360deg); }
         }
 
+        .timeline {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-time {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-width: 90px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-top: 5px;
+        }
+
+        .timeline-content h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+        }
+
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -282,6 +336,34 @@
             </p>
             <div class="video-placeholder">
                 📹 <strong>Want to see an example?</strong> <a href="https://www.instagram.com/p/DOq155hjeoi/" target="_blank" style="color: #667eea; font-weight: bold; text-decoration: underline;">Watch this video!</a>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h2>📅 Schedule for the Evening</h2>
+
+            <div class="timeline-item">
+                <div class="timeline-time">7:00 PM</div>
+                <div class="timeline-content">
+                    <h3>🎉 Arrive & Mingle</h3>
+                    <p>Come on over! Grab some snacks, drinks, and catch up with friends.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">~8:00 PM</div>
+                <div class="timeline-content">
+                    <h3>🎤 Lightning Talks Begin</h3>
+                    <p>Time for presentations! Get ready to be entertained and enlightened.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">10:00 PM</div>
+                <div class="timeline-content">
+                    <h3>🍻 After Party at Tavernakaya</h3>
+                    <p>Keep the party going! We're heading to Tavernakaya in Madison. Join us for drinks and more fun until midnight!</p>
+                </div>
             </div>
         </div>
 
@@ -480,5 +562,4 @@
         }
     </script>
 </body>
-
 </html>
